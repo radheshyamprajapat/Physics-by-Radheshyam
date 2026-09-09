@@ -1,1 +1,900 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CSIR NET Mock Test Result | Physics by Radheshyam</title><meta name="description" content="View your CSIR NET Physical Sciences mock test score, Part A/B/C performance, accuracy and question-wise solutions."><meta name="robots" content="noindex,follow"><link rel="canonical" href="https://radheshyamprajapat.github.io/Physics-by-Radheshyam/result.html"><link rel="stylesheet" href="assets/style.css"><style>body{background:#f3f5f8}.wrap{max-width:1100px;margin:35px auto;padding:0 16px}.card{background:#fff;border:1px solid #d9e0e8;border-radius:10px;padding:26px}.hero{display:flex;justify-content:space-between;gap:15px;align-items:center}.score{font-size:42px;font-weight:900;color:#123c69}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}.box{border:1px solid #d9e0e8;border-radius:8px;padding:16px;text-align:center}.box b{display:block;font-size:24px;color:#123c69}.section{border-top:1px solid #e1e5eb;padding:18px 0}.sol{border-top:1px solid #e5e8ed;padding:15px 0}.correct{color:#198754}.wrong{color:#c62828}.un{color:#6c757d}.ignored{color:#9a6700}@media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}.hero{display:block}.score{font-size:34px}}</style></head><body><div class="wrap"><div class="card"><div class="hero"><div><h1>CSIR NET Physical Sciences</h1><p id="mode"></p></div><div class="score" id="score">—</div></div><div class="grid"><div class="box"><span>Correct</span><b id="correct">0</b></div><div class="box"><span>Wrong</span><b id="wrong">0</b></div><div class="box"><span>Unattempted</span><b id="unattempted">0</b></div><div class="box"><span>Accuracy</span><b id="accuracy">0%</b></div></div><div id="sections"></div><h2>Question-wise Analysis & Solutions</h2><div id="solutions"></div><p><a href="tests.html">← Back to Mock Tests</a></p></div></div><script>(()=>{const raw=sessionStorage.getItem('pbr_result');if(!raw){document.getElementById('solutions').innerHTML='<p>No test result found. Please start a mock test first.</p>';return}const r=JSON.parse(raw),q=r.questions,a=r.answers,cfg=r.cfg;const partNames={A:'Part A — General Aptitude',B:'Part B — Physical Sciences',C:'Part C — Physical Sciences'};let total=0,correct=0,wrong=0,un=0;const stats={A:{correct:0,wrong:0,un:0,score:0,attempted:0},B:{correct:0,wrong:0,un:0,score:0,attempted:0},C:{correct:0,wrong:0,un:0,score:0,attempted:0}};q.forEach((x,i)=>{const p=x.part,sec=cfg.sections[p];if(a[i]===null){un++;stats[p].un++;return}stats[p].attempted++;if(a[i]===x.answer){correct++;stats[p].correct++;stats[p].score+=sec.marks}else{wrong++;stats[p].wrong++;stats[p].score-=sec.negative}});total=Object.values(stats).reduce((s,x)=>s+x.score,0);const attempted=correct+wrong;document.getElementById('score').textContent=`${total.toFixed(3)} / 200`;document.getElementById('correct').textContent=correct;document.getElementById('wrong').textContent=wrong;document.getElementById('unattempted').textContent=un;document.getElementById('accuracy').textContent=(attempted?((correct/attempted)*100).toFixed(1):'0')+'%';document.getElementById('mode').textContent=r.auto?'Time expired — test auto-submitted':'Test submitted successfully';document.getElementById('sections').innerHTML=Object.keys(stats).map(p=>{const s=stats[p];return `<div class="section"><h2>${partNames[p]}</h2><p>Attempted: ${s.attempted} / ${cfg.sections[p].attemptLimit} &nbsp; | &nbsp; Correct: ${s.correct} &nbsp; | &nbsp; Wrong: ${s.wrong} &nbsp; | &nbsp; Score: <b>${s.score.toFixed(3)}</b></p></div>`}).join('');document.getElementById('solutions').innerHTML=q.map((x,i)=>{let cls=a[i]===null?'un':a[i]===x.answer?'correct':'wrong';let label=a[i]===null?'Unattempted':a[i]===x.answer?'Correct':'Wrong';return `<div class="sol"><div><b>Q${i+1} — Part ${x.part}</b> <span class="${cls}">${label}</span></div><p>${x.question}</p><p><b>Your answer:</b> ${a[i]===null?'—':x.options[a[i]]}<br><b>Correct answer:</b> ${x.options[x.answer]}</p><p><b>Explanation:</b> ${x.explanation}</p></div>`}).join('')})();</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>CSIR NET Physical Sciences Mock Test Result | Physics by Radheshyam</title>
+
+<meta name="description"
+      content="View your CSIR NET Physical Sciences mock test result, score, Part A, Part B and Part C performance, accuracy and solutions.">
+
+<meta name="robots" content="noindex,follow">
+
+<link rel="canonical"
+      href="https://radheshyamprajapat.github.io/Physics-by-Radheshyam/result.html">
+
+<style>
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f3f5f8;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #102a43;
+}
+
+.result-container {
+    max-width: 1100px;
+    margin: 35px auto;
+    padding: 0 16px;
+}
+
+.result-card {
+    background: #ffffff;
+    border: 1px solid #d9e0e8;
+    border-radius: 12px;
+    padding: 26px;
+}
+
+
+/* =========================================================
+   RESULT HEADER
+========================================================= */
+
+.result-hero {
+    background: linear-gradient(135deg, #082a52, #123f73);
+    border-radius: 8px;
+    padding: 28px 30px;
+    min-height: 150px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+
+    color: #ffffff;
+}
+
+.result-title-area {
+    flex: 1;
+}
+
+.result-title {
+    margin: 0 0 10px;
+    color: #ffffff;
+    font-size: 42px;
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+.result-status {
+    margin: 0;
+    color: #86efac;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   SCORE
+========================================================= */
+
+.result-score {
+    flex-shrink: 0;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.score-value {
+    color: #ffd43b !important;
+    font-size: 52px;
+    line-height: 1;
+    font-weight: 900;
+    opacity: 1 !important;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.score-total {
+    color: #ffffff !important;
+    font-size: 30px;
+    font-weight: 700;
+    opacity: 1 !important;
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+.result-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 22px 0;
+}
+
+.result-stat {
+    background: #ffffff;
+    border: 1px solid #d9e0e8;
+    border-radius: 9px;
+    padding: 17px;
+    text-align: center;
+}
+
+.result-stat-label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #102a43;
+}
+
+.result-stat-value {
+    display: block;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+
+/* Individual colours */
+
+.stat-correct .result-stat-value {
+    color: #16a34a;
+}
+
+.stat-wrong .result-stat-value {
+    color: #dc2626;
+}
+
+.stat-unattempted .result-stat-value {
+    color: #ea580c;
+}
+
+.stat-accuracy .result-stat-value {
+    color: #7c3aed;
+}
+
+
+/* =========================================================
+   SECTION PERFORMANCE
+========================================================= */
+
+.section-performance {
+    margin-top: 22px;
+}
+
+.section-result {
+    border-top: 1px solid #dfe5eb;
+    padding: 20px 0;
+}
+
+.section-result h2 {
+    margin: 0 0 7px;
+    color: #082a52;
+    font-size: 28px;
+}
+
+.section-info {
+    margin: 0;
+    color: #173b5e;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.section-score {
+    font-weight: 800;
+    color: #082a52;
+}
+
+
+/* =========================================================
+   SOLUTIONS
+========================================================= */
+
+.solutions-heading {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #dfe5eb;
+
+    color: #082a52;
+    font-size: 30px;
+}
+
+.solution-item {
+    border-top: 1px solid #e5e8ed;
+    padding: 18px 0;
+}
+
+.solution-question {
+    font-weight: 700;
+    font-size: 17px;
+    color: #102a43;
+    margin-bottom: 10px;
+}
+
+.solution-text {
+    line-height: 1.6;
+    color: #243b53;
+}
+
+.solution-correct {
+    color: #16a34a;
+    font-weight: 700;
+}
+
+.solution-wrong {
+    color: #dc2626;
+    font-weight: 700;
+}
+
+.solution-unattempted {
+    color: #ea580c;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back-area {
+    margin-top: 30px;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 11px 18px;
+    background: #082a52;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: 600;
+}
+
+.back-button:hover {
+    background: #123f73;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .result-hero {
+        display: block;
+        text-align: center;
+    }
+
+    .result-score {
+        margin-top: 25px;
+        text-align: center;
+    }
+
+    .result-title {
+        font-size: 32px;
+    }
+
+    .score-value {
+        font-size: 44px;
+    }
+
+    .score-total {
+        font-size: 25px;
+    }
+
+    .result-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .result-container {
+        margin: 15px auto;
+        padding: 0 10px;
+    }
+
+    .result-card {
+        padding: 15px;
+    }
+
+    .result-hero {
+        padding: 22px 15px;
+    }
+
+    .result-title {
+        font-size: 27px;
+    }
+
+    .result-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .result-stat {
+        padding: 13px 8px;
+    }
+
+    .result-stat-value {
+        font-size: 24px;
+    }
+
+    .section-result h2 {
+        font-size: 23px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="result-container">
+
+<div class="result-card">
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <div class="result-hero">
+
+        <div class="result-title-area">
+
+            <h1 class="result-title">
+                CSIR NET Physical Sciences
+            </h1>
+
+            <p class="result-status" id="mode">
+                Test submitted successfully
+            </p>
+
+        </div>
+
+
+        <div class="result-score">
+
+            <span class="score-value" id="score">
+                0.000
+            </span>
+
+            <span class="score-total">
+                / 200
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         OVERALL STATISTICS
+    ====================================================== -->
+
+    <div class="result-stats">
+
+        <div class="result-stat stat-correct">
+
+            <span class="result-stat-label">
+                Correct
+            </span>
+
+            <span class="result-stat-value" id="correct">
+                0
+            </span>
+
+        </div>
+
+
+        <div class="result-stat stat-wrong">
+
+            <span class="result-stat-label">
+                Wrong
+            </span>
+
+            <span class="result-stat-value" id="wrong">
+                0
+            </span>
+
+        </div>
+
+
+        <div class="result-stat stat-unattempted">
+
+            <span class="result-stat-label">
+                Unattempted
+            </span>
+
+            <span class="result-stat-value" id="unattempted">
+                75
+            </span>
+
+        </div>
+
+
+        <div class="result-stat stat-accuracy">
+
+            <span class="result-stat-label">
+                Accuracy
+            </span>
+
+            <span class="result-stat-value" id="accuracy">
+                0%
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         PART-WISE RESULT
+    ====================================================== -->
+
+    <div
+        class="section-performance"
+        id="sections">
+    </div>
+
+
+
+    <!-- =====================================================
+         SOLUTIONS
+    ====================================================== -->
+
+    <h2 class="solutions-heading">
+        Question-wise Analysis &amp; Solutions
+    </h2>
+
+    <div id="solutions"></div>
+
+
+    <!-- =====================================================
+         BACK
+    ====================================================== -->
+
+    <div class="back-area">
+
+        <a
+            class="back-button"
+            href="tests.html">
+
+            ← Back to Mock Tests
+
+        </a>
+
+    </div>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+(() => {
+
+    /* =====================================================
+       GET RESULT DATA
+    ====================================================== */
+
+    const raw = sessionStorage.getItem("pbr_result");
+
+
+    if (!raw) {
+
+        document.getElementById("solutions").innerHTML =
+            "<p>No test result found. Please start a mock test first.</p>";
+
+        return;
+
+    }
+
+
+    const result = JSON.parse(raw);
+
+    const questions = result.questions;
+
+    const answers = result.answers;
+
+    const config = result.cfg;
+
+
+
+    /* =====================================================
+       SECTION NAMES
+    ====================================================== */
+
+    const partNames = {
+
+        A: "Part A — General Aptitude",
+
+        B: "Part B — Physical Sciences",
+
+        C: "Part C — Physical Sciences"
+
+    };
+
+
+
+    /* =====================================================
+       INITIAL STATISTICS
+    ====================================================== */
+
+    let totalScore = 0;
+
+    let totalCorrect = 0;
+
+    let totalWrong = 0;
+
+    let totalUnattempted = 0;
+
+
+    const stats = {
+
+        A: {
+            correct: 0,
+            wrong: 0,
+            un: 0,
+            score: 0,
+            attempted: 0
+        },
+
+        B: {
+            correct: 0,
+            wrong: 0,
+            un: 0,
+            score: 0,
+            attempted: 0
+        },
+
+        C: {
+            correct: 0,
+            wrong: 0,
+            un: 0,
+            score: 0,
+            attempted: 0
+        }
+
+    };
+
+
+
+    /* =====================================================
+       CALCULATE RESULT
+    ====================================================== */
+
+    questions.forEach((question, index) => {
+
+        const part = question.part;
+
+        const sectionConfig = config.sections[part];
+
+        const userAnswer = answers[index];
+
+
+        /* Unattempted */
+
+        if (userAnswer === null || userAnswer === undefined) {
+
+            totalUnattempted++;
+
+            stats[part].un++;
+
+            return;
+
+        }
+
+
+        stats[part].attempted++;
+
+
+        /* Correct */
+
+        if (userAnswer === question.answer) {
+
+            totalCorrect++;
+
+            stats[part].correct++;
+
+            stats[part].score += sectionConfig.marks;
+
+        }
+
+
+        /* Wrong */
+
+        else {
+
+            totalWrong++;
+
+            stats[part].wrong++;
+
+            stats[part].score -= sectionConfig.negative;
+
+        }
+
+    });
+
+
+
+    /* =====================================================
+       TOTAL SCORE
+    ====================================================== */
+
+    totalScore =
+        stats.A.score +
+        stats.B.score +
+        stats.C.score;
+
+
+    const totalAttempted =
+        totalCorrect + totalWrong;
+
+
+    /* =====================================================
+       DISPLAY MAIN RESULT
+    ====================================================== */
+
+    document.getElementById("score").textContent =
+        totalScore.toFixed(3);
+
+
+    document.getElementById("correct").textContent =
+        totalCorrect;
+
+
+    document.getElementById("wrong").textContent =
+        totalWrong;
+
+
+    document.getElementById("unattempted").textContent =
+        totalUnattempted;
+
+
+    document.getElementById("accuracy").textContent =
+
+        totalAttempted
+
+            ? ((totalCorrect / totalAttempted) * 100).toFixed(1) + "%"
+
+            : "0%";
+
+
+
+    /* =====================================================
+       SUBMISSION MESSAGE
+    ====================================================== */
+
+    document.getElementById("mode").textContent =
+
+        result.auto
+
+            ? "Time expired — test auto-submitted"
+
+            : "Test submitted successfully";
+
+
+
+    /* =====================================================
+       PART-WISE RESULT
+    ====================================================== */
+
+    document.getElementById("sections").innerHTML =
+
+        Object.keys(stats)
+
+        .map(part => {
+
+            const stat = stats[part];
+
+            const sectionConfig =
+                config.sections[part];
+
+
+            return `
+
+                <div class="section-result">
+
+                    <h2>
+                        ${partNames[part]}
+                    </h2>
+
+                    <p class="section-info">
+
+                        Attempted:
+                        <strong>
+                            ${stat.attempted}
+                        </strong>
+                        /
+                        ${sectionConfig.attemptLimit}
+
+                        &nbsp; | &nbsp;
+
+                        Correct:
+                        <strong>
+                            ${stat.correct}
+                        </strong>
+
+                        &nbsp; | &nbsp;
+
+                        Wrong:
+                        <strong>
+                            ${stat.wrong}
+                        </strong>
+
+                        &nbsp; | &nbsp;
+
+                        Score:
+                        <span class="section-score">
+                            ${stat.score.toFixed(3)}
+                        </span>
+
+                    </p>
+
+                </div>
+
+            `;
+
+        })
+
+        .join("");
+
+
+
+    /* =====================================================
+       QUESTION-WISE SOLUTIONS
+    ====================================================== */
+
+    document.getElementById("solutions").innerHTML =
+
+        questions
+
+        .map((question, index) => {
+
+            const userAnswer = answers[index];
+
+
+            let statusClass;
+
+            let statusText;
+
+
+            if (
+                userAnswer === null ||
+                userAnswer === undefined
+            ) {
+
+                statusClass =
+                    "solution-unattempted";
+
+                statusText =
+                    "Unattempted";
+
+            }
+
+
+            else if (
+                userAnswer === question.answer
+            ) {
+
+                statusClass =
+                    "solution-correct";
+
+                statusText =
+                    "Correct";
+
+            }
+
+
+            else {
+
+                statusClass =
+                    "solution-wrong";
+
+                statusText =
+                    "Wrong";
+
+            }
+
+
+
+            const userAnswerText =
+
+                userAnswer === null ||
+                userAnswer === undefined
+
+                    ? "—"
+
+                    : question.options[userAnswer];
+
+
+
+            const correctAnswerText =
+
+                question.options[question.answer];
+
+
+
+            return `
+
+                <div class="solution-item">
+
+                    <div class="solution-question">
+
+                        Q${index + 1}
+                        —
+                        Part ${question.part}
+
+                        &nbsp;
+
+                        <span class="${statusClass}">
+                            ${statusText}
+                        </span>
+
+                    </div>
+
+
+                    <p class="solution-text">
+
+                        ${question.question}
+
+                    </p>
+
+
+                    <p class="solution-text">
+
+                        <strong>
+                            Your answer:
+                        </strong>
+
+                        ${userAnswerText}
+
+                        <br>
+
+                        <strong>
+                            Correct answer:
+                        </strong>
+
+                        ${correctAnswerText}
+
+                    </p>
+
+
+                    <p class="solution-text">
+
+                        <strong>
+                            Explanation:
+                        </strong>
+
+                        ${question.explanation}
+
+                    </p>
+
+                </div>
+
+            `;
+
+        })
+
+        .join("");
+
+})();
+
+</script>
+
+</body>
+</html>
