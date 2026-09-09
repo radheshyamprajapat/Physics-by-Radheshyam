@@ -1,27 +1,19 @@
-# Physics by Radheshyam
+# Physics by Radheshyam — Design v2
 
-A clean, responsive static education website for GitHub Pages.
+This version closely follows the supplied homepage reference:
+- dark navy hero
+- yellow accent
+- teacher portrait on the right
+- compact top navigation with Login
+- six-item resource strip
+- four colorful course cards
+- mentor section
+- free resources section
+- dark CTA/footer
 
-## Files
-- `index.html` — homepage
-- `courses.html` — courses
-- `notes.html` — notes
-- `pyqs.html` — PYQs
-- `tests.html` — mock tests
-- `formula-sheets.html` — formula sheets
-- `about.html` — teacher profile
-- `youtube.html` — YouTube
-- `contact.html` — contact
-- `assets/style.css` — all styling
-- `assets/script.js` — mobile menu + search
-- `assets/radheshyam.png` — profile image
-- `robots.txt`, `sitemap.xml` — SEO basics
+No simulation page is included.
 
-## GitHub Pages
-Upload the contents of this folder to a repository. In GitHub:
-Settings → Pages → Deploy from branch → main → / (root).
-
-Then update the canonical URL and sitemap URL if your repository name is different.
-
-## Before publishing
-Replace placeholder contact/social/YouTube links and connect your real Notes/PYQ/Test files.
+Before publishing:
+1. Replace placeholder YouTube/contact links.
+2. Connect your real Notes/PYQ/Test PDFs and question engine.
+3. If you use a custom GitHub repository name, update the canonical URL and sitemap URL.
