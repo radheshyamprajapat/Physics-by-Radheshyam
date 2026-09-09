@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://radheshyamprajapat.github.io/physics-by-radheshyam/sitemap.xml
+Sitemap: https://radheshyamprajapat.github.io/Physics-by-Radheshyam/sitemap.xml

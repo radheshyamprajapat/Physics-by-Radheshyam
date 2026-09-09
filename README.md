@@ -1,19 +1,13 @@
-# Physics by Radheshyam — Design v2
+# Physics by Radheshyam — CSIR NET Mock Test v2
 
-This version closely follows the supplied homepage reference:
-- dark navy hero
-- yellow accent
-- teacher portrait on the right
-- compact top navigation with Login
-- six-item resource strip
-- four colorful course cards
-- mentor section
-- free resources section
-- dark CTA/footer
+Proper three-part CSIR NET Physical Sciences practice engine.
 
-No simulation page is included.
+- Part A: 20 questions, max 15 attempts, +2 / -0.5
+- Part B: 25 questions, max 20 attempts, +3.5 / -0.875
+- Part C: 30 questions, max 20 attempts, +5 / -1.25
+- 180-minute timer
+- Section tabs and section-only right-side question palette
+- Green answered, red not answered, purple marked for review
+- Result page with section scores and explanations
 
-Before publishing:
-1. Replace placeholder YouTube/contact links.
-2. Connect your real Notes/PYQ/Test PDFs and question engine.
-3. If you use a custom GitHub repository name, update the canonical URL and sitemap URL.
+Questions are original practice questions, not official NTA questions. Review the question bank before public launch.
