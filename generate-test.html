@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Generate Random Physics Test | Physics by Radheshyam</title>
+
+<meta name="description"
+      content="Generate random Physics practice tests from the Physics by Radheshyam question bank for CSIR NET, GATE, JEST, TIFR and other examinations.">
+
+<link rel="canonical"
+      href="https://radheshyamprajapat.github.io/Physics-by-Radheshyam/generate-test.html">
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f5f7fb;
+    color:#172033;
+}
+
+.header{
+    background:#071a3d;
+    color:white;
+    padding:18px 6%;
+}
+
+.header-inner{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:800;
+}
+
+.nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+}
+
+.container{
+    max-width:1000px;
+    margin:45px auto;
+    padding:0 20px;
+}
+
+.hero{
+    background:linear-gradient(135deg,#071a3d,#123b78);
+    color:white;
+    border-radius:18px;
+    padding:35px;
+    margin-bottom:25px;
+}
+
+.hero h1{
+    margin-top:0;
+    font-size:34px;
+}
+
+.card{
+    background:white;
+    border-radius:16px;
+    padding:30px;
+    box-shadow:0 8px 30px rgba(0,0,0,.08);
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+label{
+    font-weight:700;
+}
+
+select,
+input{
+    padding:13px;
+    border:1px solid #d8deea;
+    border-radius:9px;
+    font-size:15px;
+    background:white;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+button{
+    border:0;
+    background:#f5b800;
+    color:#071a3d;
+    padding:15px 25px;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+button:hover{
+    transform:translateY(-1px);
+}
+
+.info{
+    margin-top:20px;
+    padding:15px;
+    background:#f1f5ff;
+    border-radius:10px;
+}
+
+.count{
+    font-weight:800;
+}
+
+@media(max-width:700px){
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+    .header-inner{
+        flex-direction:column;
+        gap:12px;
+    }
+
+    .nav a{
+        margin:0 7px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="header">
+
+<div class="header-inner">
+
+<div class="logo">
+⚛ Physics by Radheshyam
+</div>
+
+<nav class="nav">
+
+<a href="index.html">Home</a>
+<a href="tests.html">Tests</a>
+<a href="question-bank.html">Question Bank</a>
+
+</nav>
+
+</div>
+
+</header>
+
+
+<main class="container">
+
+<section class="hero">
+
+<h1>Generate Random Test</h1>
+
+<p>
+Create a fresh Physics practice test from the question bank.
+Choose your exam, subject, topic, difficulty and number of questions.
+</p>
+
+</section>
+
+
+<section class="card">
+
+<div class="grid">
+
+<div class="field">
+
+<label>Exam</label>
+
+<select id="exam">
+
+<option value="ALL">All Exams</option>
+<option value="CSIR NET">CSIR NET</option>
+<option value="GATE">GATE</option>
+<option value="JEST">JEST</option>
+<option value="TIFR">TIFR</option>
+<option value="BARC">BARC</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>Subject</label>
+
+<select id="subject">
+
+<option value="ALL">All Subjects</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>Topic</label>
+
+<select id="topic">
+
+<option value="ALL">All Topics</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>Difficulty</label>
+
+<select id="difficulty">
+
+<option value="ALL">All Levels</option>
+<option value="Easy">Easy</option>
+<option value="Medium">Medium</option>
+<option value="Hard">Hard</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>Question Type</label>
+
+<select id="type">
+
+<option value="ALL">All Types</option>
+<option value="MCQ">MCQ</option>
+<option value="MSQ">MSQ</option>
+<option value="NAT">NAT</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>Number of Questions</label>
+
+<input
+    id="number"
+    type="number"
+    min="1"
+    max="100"
+    value="20"
+>
+
+</div>
+
+
+<div class="field full">
+
+<label>Test Mode</label>
+
+<select id="mode">
+
+<option value="practice">
+Practice Test
+</option>
+
+<option value="csir">
+CSIR NET Pattern
+</option>
+
+</select>
+
+</div>
+
+
+</div>
+
+
+<div class="info">
+
+Available questions:
+
+<span
+    id="available"
+    class="count">
+0
+</span>
+
+</div>
+
+
+<br>
+
+<button onclick="generateTest()">
+Generate Random Test →
+</button>
+
+</section>
+
+</main>
+
+
+<script src="assets/questions/solid-state-physics.js"></script>
+<script src="assets/questions/nuclear-physics.js"></script>
+<script src="assets/questions/quantum-mechanics.js"></script>
+<script src="assets/questions/mathematical-physics.js"></script>
+<script src="assets/questions/classical-mechanics.js"></script>
+<script src="assets/questions/electromagnetism.js"></script>
+<script src="assets/questions/atomic-molecular.js"></script>
+<script src="assets/questions/thermal-statistical.js"></script>
+<script src="assets/questions/condensed-matter.js"></script>
+
+<script src="assets/questions/question-bank.js"></script>
+
+
+<script>
+
+const bank = window.PHYSICS_QUESTION_BANK || [];
+
+const examEl = document.getElementById("exam");
+const subjectEl = document.getElementById("subject");
+const topicEl = document.getElementById("topic");
+const difficultyEl = document.getElementById("difficulty");
+const typeEl = document.getElementById("type");
+const availableEl = document.getElementById("available");
+
+
+function uniqueValues(array, key){
+
+    return [
+        ...new Set(
+            array
+            .map(q => q[key])
+            .filter(Boolean)
+        )
+    ].sort();
+
+}
+
+
+function populateSubjects(){
+
+    subjectEl.innerHTML =
+        '<option value="ALL">All Subjects</option>';
+
+    uniqueValues(bank,"subject").forEach(subject => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = subject;
+        option.textContent = subject;
+
+        subjectEl.appendChild(option);
+
+    });
+
+}
+
+
+function populateTopics(){
+
+    const subject = subjectEl.value;
+
+    let filtered = bank;
+
+    if(subject !== "ALL"){
+
+        filtered =
+            filtered.filter(
+                q => q.subject === subject
+            );
+
+    }
+
+    topicEl.innerHTML =
+        '<option value="ALL">All Topics</option>';
+
+    uniqueValues(filtered,"topic").forEach(topic => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = topic;
+        option.textContent = topic;
+
+        topicEl.appendChild(option);
+
+    });
+
+}
+
+
+function getFilteredQuestions(){
+
+    let questions = [...bank];
+
+    const exam = examEl.value;
+    const subject = subjectEl.value;
+    const topic = topicEl.value;
+    const difficulty = difficultyEl.value;
+    const type = typeEl.value;
+
+    if(exam !== "ALL"){
+
+        questions =
+            questions.filter(
+                q => q.exam === exam
+            );
+
+    }
+
+    if(subject !== "ALL"){
+
+        questions =
+            questions.filter(
+                q => q.subject === subject
+            );
+
+    }
+
+    if(topic !== "ALL"){
+
+        questions =
+            questions.filter(
+                q => q.topic === topic
+            );
+
+    }
+
+    if(difficulty !== "ALL"){
+
+        questions =
+            questions.filter(
+                q => q.difficulty === difficulty
+            );
+
+    }
+
+    if(type !== "ALL"){
+
+        questions =
+            questions.filter(
+                q => q.type === type
+            );
+
+    }
+
+    return questions;
+
+}
+
+
+function updateCount(){
+
+    const questions =
+        getFilteredQuestions();
+
+    availableEl.textContent =
+        questions.length;
+
+}
+
+
+function shuffle(array){
+
+    const arr = [...array];
+
+    for(let i = arr.length - 1; i > 0; i--){
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+        [arr[i],arr[j]] =
+        [arr[j],arr[i]];
+
+    }
+
+    return arr;
+
+}
+
+
+function generateTest(){
+
+    const available =
+        getFilteredQuestions();
+
+    const number =
+        parseInt(
+            document.getElementById("number").value
+        );
+
+    if(available.length === 0){
+
+        alert(
+            "No questions are available for these filters."
+        );
+
+        return;
+
+    }
+
+    if(number > available.length){
+
+        alert(
+            "Only " +
+            available.length +
+            " questions are available for the selected filters."
+        );
+
+        return;
+
+    }
+
+    const selected =
+        shuffle(available)
+        .slice(0,number);
+
+    const config = {
+
+        id:
+            "random-" +
+            Date.now(),
+
+        title:
+            "Random Physics Practice Test",
+
+        mode:
+            document.getElementById("mode").value,
+
+        exam:
+            examEl.value,
+
+        subject:
+            subjectEl.value,
+
+        questions:
+            selected.map(q => q.id)
+
+    };
+
+
+    sessionStorage.setItem(
+        "generatedTest",
+        JSON.stringify(config)
+    );
+
+
+    window.location.href =
+        "random-test.html";
+
+}
+
+
+subjectEl.addEventListener(
+    "change",
+    () => {
+
+        populateTopics();
+        updateCount();
+
+    }
+);
+
+
+examEl.addEventListener(
+    "change",
+    updateCount
+);
+
+topicEl.addEventListener(
+    "change",
+    updateCount
+);
+
+difficultyEl.addEventListener(
+    "change",
+    updateCount
+);
+
+typeEl.addEventListener(
+    "change",
+    updateCount
+);
+
+
+populateSubjects();
+populateTopics();
+updateCount();
+
+</script>
+
+</body>
+</html>
