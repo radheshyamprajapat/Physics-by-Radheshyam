@@ -1,1 +1,174 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102b46">
+  <title>UPESSC Assistant Professor Physics | Score Portal</title>
+  <meta name="description" content="UPESSC Assistant Professor Physics exam score submission portal by Physics by Radheshyam.">
+  <style>
+    :root{--navy:#102b46;--blue:#1769aa;--cyan:#38bdf8;--ink:#172536;--muted:#66788a;--line:#e4eaf0;--bg:#f3f7fb;--white:#fff;--green:#087f5b;--red:#b42318}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+    .wrap{max-width:900px;margin:0 auto;padding:22px 16px 48px}
+    .hero{background:linear-gradient(125deg,#102b46,#174d78);color:white;border-radius:20px;padding:25px 24px;box-shadow:0 12px 30px #102b461c}
+    .brand{font-size:13px;letter-spacing:.12em;font-weight:800;color:#bde8ff;text-transform:uppercase}
+    h1{font-size:clamp(25px,5vw,38px);line-height:1.14;margin:12px 0 8px}
+    .hero p{color:#d9e9f5;margin:0;line-height:1.6}
+    .pill{display:inline-block;margin-top:16px;padding:6px 11px;border:1px solid #ffffff45;border-radius:999px;font-size:12px;color:#e8f6ff}
+    .panel{background:white;border:1px solid var(--line);border-radius:18px;padding:22px;margin-top:18px;box-shadow:0 8px 24px #102b4608}
+    h2{font-size:21px;margin:0 0 5px}.sub{color:var(--muted);font-size:14px;line-height:1.55;margin:0 0 20px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+    label{display:block;font-size:13px;font-weight:700;margin:0 0 7px}
+    input,select{width:100%;border:1px solid #d5dee8;border-radius:10px;padding:12px 13px;font:inherit;color:var(--ink);background:#fff;outline:none}
+    input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #1769aa18}
+    .field{min-width:0}.full{grid-column:1/-1}
+    .calc{background:#f0f7fc;border:1px solid #dcecf8;border-radius:12px;padding:13px 15px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+    .calc strong{font-size:18px;color:var(--navy)}.calc span{font-size:13px;color:var(--muted)}
+    .btn{border:0;border-radius:11px;padding:13px 18px;background:var(--blue);color:#fff;font-size:15px;font-weight:800;cursor:pointer;width:100%;margin-top:17px}
+    .btn:hover{background:#10578f}.btn:disabled{opacity:.55;cursor:wait}
+    .notice{font-size:12px;color:var(--muted);line-height:1.55;margin-top:12px}
+    .status{display:none;margin-top:14px;padding:12px 14px;border-radius:10px;font-size:14px;line-height:1.5}
+    .status.ok{display:block;background:#e9f8f1;color:#086044}.status.err{display:block;background:#fff0ef;color:#a1261d}
+    .footer{text-align:center;color:#718096;font-size:12px;padding:22px 8px}
+    .admin-link{color:#d5efff;text-decoration:underline;font-size:12px;margin-left:10px}
+    @media(max-width:620px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.hero{padding:22px 18px}.panel{padding:18px}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="brand">⚛ Physics by Radheshyam</div>
+    <h1>UPESSC Assistant Professor<br>Physics Score Portal</h1>
+    <p>Answer Key के अनुसार अपना स्कोर दर्ज करें। आपके द्वारा भेजे गए स्कोर cutoff analysis में मदद करेंगे।</p>
+    <span class="pill">Student Score Submission</span>
+    <a class="admin-link" href="#admin">Admin Dashboard</a>
+  </header>
 
+  <main class="panel">
+    <h2>अपना Score Submit करें</h2>
+    <p class="sub">कृपया Answer Key से मिलान करने के बाद सही जानकारी भरें। नाम देना वैकल्पिक है।</p>
+
+    <form id="scoreForm" method="post" target="submitFrame">
+      <input type="hidden" name="requestId" id="requestId">
+      <div class="grid">
+        <div class="field full">
+          <label for="studentName">आपका नाम (वैकल्पिक)</label>
+          <input id="studentName" name="studentName" maxlength="60" placeholder="अपना नाम लिखें">
+        </div>
+        <div class="field">
+          <label for="shift">Exam Shift</label>
+          <select id="shift" name="shift" required>
+            <option value="">Select Shift</option>
+            <option>Morning Shift</option>
+            <option>Evening Shift</option>
+            <option>Not Sure</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="marks">आपके कुल अंक</label>
+          <input id="marks" name="marks" type="number" min="0" max="120" step="0.01" placeholder="जैसे 78.5" required>
+        </div>
+        <div class="field">
+          <label for="correct">सही प्रश्न</label>
+          <input id="correct" name="correct" type="number" min="0" max="120" step="1" value="0" required>
+        </div>
+        <div class="field">
+          <label for="wrong">गलत प्रश्न</label>
+          <input id="wrong" name="wrong" type="number" min="0" max="120" step="1" value="0" required>
+        </div>
+        <div class="field full">
+          <div class="calc">
+            <span>अनअटेम्प्टेड प्रश्न (कुल 120 में से)</span>
+            <strong id="unattemptedText">120</strong>
+          </div>
+          <input type="hidden" id="unattempted" name="unattempted" value="120">
+        </div>
+      </div>
+      <button class="btn" id="submitBtn" type="submit">Submit My Score</button>
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+      <p class="notice">नोट: कुल अंक वही दर्ज करें जो आपकी answer key और लागू marking scheme के अनुसार बन रहे हैं। एक से अधिक बार submit न करें। यह डेटा केवल इस परीक्षा के score analysis के लिए लिया जा रहा है।</p>
+    </form>
+    <iframe name="submitFrame" id="submitFrame" title="Submission frame" style="display:none"></iframe>
+  </main>
+  <div class="footer">© <span id="year"></span> Physics by Radheshyam · UPESSC Physics Score Portal</div>
+</div>
+<script>
+  // IMPORTANT: Replace this with your deployed Google Apps Script Web App URL.
+  const SCRIPT_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+  const TOTAL_QUESTIONS = 120;
+  const form = document.getElementById("scoreForm");
+  const correct = document.getElementById("correct");
+  const wrong = document.getElementById("wrong");
+  const unattempted = document.getElementById("unattempted");
+  const unattemptedText = document.getElementById("unattemptedText");
+  const statusBox = document.getElementById("status");
+  const submitBtn = document.getElementById("submitBtn");
+  let waitingForRequest = null;
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  function updateCount(){
+    const c = Number(correct.value || 0), w = Number(wrong.value || 0);
+    const remaining = TOTAL_QUESTIONS - c - w;
+    unattempted.value = remaining >= 0 ? remaining : 0;
+    unattemptedText.textContent = remaining >= 0 ? remaining : "Invalid total";
+    unattemptedText.style.color = remaining >= 0 ? "" : "#b42318";
+  }
+  correct.addEventListener("input", updateCount);
+  wrong.addEventListener("input", updateCount);
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    statusBox.className = "status";
+    if(SCRIPT_URL.includes("PASTE_YOUR")){
+      statusBox.textContent = "Website setup अधूरा है: Apps Script URL अभी index.html में paste नहीं किया गया है।";
+      statusBox.className = "status err"; return;
+    }
+    const c = Number(correct.value), w = Number(wrong.value), m = Number(document.getElementById("marks").value);
+    if(!Number.isInteger(c) || !Number.isInteger(w) || c < 0 || w < 0 || c+w > TOTAL_QUESTIONS){
+      statusBox.textContent = "सही और गलत प्रश्नों का योग 120 से अधिक नहीं होना चाहिए।";
+      statusBox.className = "status err"; return;
+    }
+    if(!Number.isFinite(m) || m < 0 || m > 120){
+      statusBox.textContent = "कृपया 0 से 120 के बीच वैध कुल अंक भरें।";
+      statusBox.className = "status err"; return;
+    }
+    if(!document.getElementById("shift").value){
+      statusBox.textContent = "कृपया अपनी Exam Shift चुनें।";
+      statusBox.className = "status err"; return;
+    }
+    const requestId = "req_" + Date.now() + "_" + Math.random().toString(36).slice(2);
+    waitingForRequest = requestId;
+    document.getElementById("requestId").value = requestId;
+    form.action = SCRIPT_URL;
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting...";
+    statusBox.textContent = "आपका स्कोर submit हो रहा है...";
+    statusBox.className = "status";
+    form.submit();
+    window.setTimeout(() => {
+      if(waitingForRequest === requestId){
+        submitBtn.disabled = false; submitBtn.textContent = "Submit My Score";
+        statusBox.textContent = "Response मिलने में देरी हो रही है। कृपया कुछ देर बाद Google Sheet/Admin से जाँचें; दोबारा submit करने से duplicate entry हो सकती है।";
+        statusBox.className = "status err";
+        waitingForRequest = null;
+      }
+    }, 20000);
+  });
+
+  window.addEventListener("message", function(event){
+    const data = event.data;
+    if(!data || data.type !== "UPESSC_SCORE_SUBMIT" || data.requestId !== waitingForRequest) return;
+    waitingForRequest = null;
+    submitBtn.disabled = false; submitBtn.textContent = "Submit My Score";
+    if(data.ok){
+      statusBox.textContent = "धन्यवाद! आपका स्कोर सफलतापूर्वक दर्ज हो गया है।";
+      statusBox.className = "status ok";
+      form.reset(); correct.value = 0; wrong.value = 0; updateCount();
+    } else {
+      statusBox.textContent = data.message || "स्कोर submit नहीं हो पाया। कृपया दोबारा प्रयास करें।";
+      statusBox.className = "status err";
+    }
+  });
+</script>
+</body>
+</html>

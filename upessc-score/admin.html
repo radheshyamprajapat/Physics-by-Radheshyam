@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UPESSC Score Admin | Physics by Radheshyam</title>
+<style>
+:root{--navy:#102b46;--blue:#1769aa;--bg:#f3f7fb;--line:#e3eaf1;--muted:#65778a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#172536;font-family:Inter,system-ui,sans-serif}
+.wrap{max-width:1100px;margin:auto;padding:22px 15px 50px}.hero{background:linear-gradient(120deg,#102b46,#174d78);color:white;padding:22px;border-radius:17px}
+.brand{color:#bde8ff;font-size:12px;font-weight:800;letter-spacing:.12em}h1{font-size:27px;margin:9px 0}.hero p{margin:0;color:#d9e9f5;font-size:14px}
+.panel,.stat{background:white;border:1px solid var(--line);border-radius:14px;padding:17px;margin-top:15px}
+.login{display:flex;gap:10px;flex-wrap:wrap}.login input{flex:1;min-width:220px;padding:12px;border:1px solid #d5dee8;border-radius:9px;font:inherit}
+button{border:0;border-radius:9px;background:var(--blue);color:white;padding:12px 17px;font-weight:750;cursor:pointer}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat small{color:var(--muted)}.stat strong{display:block;font-size:27px;margin-top:7px;color:var(--navy)}
+h2{font-size:18px;margin:0 0 13px}.bars{display:grid;gap:11px}.barrow{display:grid;grid-template-columns:115px 1fr 35px;gap:10px;align-items:center;font-size:13px}.track{height:10px;background:#edf2f7;border-radius:99px;overflow:hidden}.fill{height:100%;background:#2c8bc8;border-radius:99px}
+.tablewrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:700px;font-size:13px}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);white-space:nowrap}th{background:#f4f8fb;color:#43566a}
+.msg{font-size:13px;color:var(--muted);margin-top:10px}.hidden{display:none}.actions{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+@media(max-width:700px){.cards{grid-template-columns:repeat(2,1fr)}.barrow{grid-template-columns:95px 1fr 28px}}
+</style>
+</head>
+<body><div class="wrap">
+<header class="hero"><div class="brand">⚛ PHYSICS BY RADHESHYAM</div><h1>UPESSC Physics — Admin Dashboard</h1><p>Student submissions, score statistics and response list.</p></header>
+<section class="panel">
+  <h2>Admin Login</h2>
+  <div class="login"><input id="key" type="password" placeholder="Enter your private admin key"><button id="load">Load Dashboard</button></div>
+  <div id="msg" class="msg">Dashboard देखने के लिए अपना Admin Key डालें।</div>
+</section>
+<div id="dashboard" class="hidden">
+  <div class="cards">
+    <div class="stat"><small>Total Submissions</small><strong id="total">0</strong></div>
+    <div class="stat"><small>Average Marks</small><strong id="average">0</strong></div>
+    <div class="stat"><small>Highest Marks</small><strong id="highest">0</strong></div>
+    <div class="stat"><small>Lowest Marks</small><strong id="lowest">0</strong></div>
+  </div>
+  <section class="panel"><h2>Score Distribution</h2><div id="bars" class="bars"></div></section>
+  <section class="panel"><h2>Shift-wise Submissions</h2><div id="shifts" class="msg"></div></section>
+  <section class="panel">
+    <div class="actions"><h2>Recent Student Responses</h2><button id="csv">Download CSV</button></div>
+    <div class="tablewrap"><table><thead><tr><th>#</th><th>Date & Time</th><th>Name</th><th>Shift</th><th>Correct</th><th>Wrong</th><th>Unattempted</th><th>Marks</th></tr></thead><tbody id="rows"></tbody></table></div>
+    <p class="msg">अधिकतम 500 नवीनतम entries dashboard पर दिखाई जाती हैं। पूरी response sheet Google Sheets में उपलब्ध रहेगी।</p>
+  </section>
+</div>
+</div>
+<script>
+const SCRIPT_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+let currentEntries = [];
+const $ = id => document.getElementById(id);
+$("load").addEventListener("click", loadDashboard);
+function loadDashboard(){
+  const key = $("key").value.trim();
+  if(!key){$("msg").textContent="Admin Key दर्ज करें।";return;}
+  if(SCRIPT_URL.includes("PASTE_YOUR")){$("msg").textContent="पहले admin.html में Apps Script URL paste करें।";return;}
+  $("msg").textContent="Loading...";
+  const callback = "upesscCallback_" + Date.now();
+  const script = document.createElement("script");
+  window[callback] = data => {
+    delete window[callback]; script.remove();
+    if(!data || !data.ok){$("msg").textContent=(data && data.message==="Unauthorized")?"गलत Admin Key।":"डेटा लोड नहीं हो पाया।";return;}
+    render(data); $("msg").textContent="Dashboard loaded successfully.";
+  };
+  script.onerror = () => {$("msg").textContent="Connection error. URL और deployment access जाँचें।";delete window[callback];script.remove();};
+  script.src = SCRIPT_URL + "?action=stats&callback=" + callback + "&key=" + encodeURIComponent(key);
+  document.body.appendChild(script);
+}
+function render(d){
+  $("dashboard").classList.remove("hidden");
+  $("total").textContent=d.total; $("average").textContent=d.average;
+  $("highest").textContent=d.highest; $("lowest").textContent=d.lowest;
+  const buckets=d.buckets||{}, max=Math.max(1,...Object.values(buckets));
+  $("bars").innerHTML=Object.entries(buckets).map(([label,count])=>`<div class="barrow"><span>${esc(label)}</span><div class="track"><div class="fill" style="width:${count/max*100}%"></div></div><b>${count}</b></div>`).join("");
+  $("shifts").textContent=Object.entries(d.shifts||{}).map(([k,v])=>`${k}: ${v}`).join(" · ") || "अभी कोई submission नहीं है।";
+  currentEntries=d.entries||[];
+  $("rows").innerHTML=currentEntries.map((x,i)=>`<tr><td>${i+1}</td><td>${esc(new Date(x.timestamp).toLocaleString("en-IN"))}</td><td>${esc(x.name||"—")}</td><td>${esc(x.shift)}</td><td>${x.correct}</td><td>${x.wrong}</td><td>${x.unattempted}</td><td><b>${x.marks}</b></td></tr>`).join("") || '<tr><td colspan="8">No submissions yet.</td></tr>';
+}
+function esc(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+$("csv").addEventListener("click",()=>{
+  const header=["Date","Name","Shift","Correct","Wrong","Unattempted","Marks"];
+  const lines=[header,...currentEntries.map(x=>[x.timestamp,x.name,x.shift,x.correct,x.wrong,x.unattempted,x.marks])];
+  const csv=lines.map(r=>r.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\r\n");
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8"}));a.download="upessc-physics-scores.csv";a.click();URL.revokeObjectURL(a.href);
+});
+</script></body></html>
