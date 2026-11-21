@@ -66,7 +66,7 @@
         </div>
         <div class="field">
           <label for="marks">आपके कुल अंक</label>
-          <input id="marks" name="marks" type="number" min="0" max="120" step="0.01" placeholder="जैसे 78.5" required>
+          <input id="marks" name="marks" type="number" min="0" max="360" step="0.01" placeholder="जैसे 78.5" required>
         </div>
         <div class="field">
           <label for="correct">सही प्रश्न</label>
@@ -128,7 +128,7 @@
       statusBox.textContent = "सही और गलत प्रश्नों का योग 120 से अधिक नहीं होना चाहिए।";
       statusBox.className = "status err"; return;
     }
-    if(!Number.isFinite(m) || m < 0 || m > 120){
+    if(!Number.isFinite(m) || m < 0 || m > 360){
       statusBox.textContent = "कृपया 0 से 120 के बीच वैध कुल अंक भरें।";
       statusBox.className = "status err"; return;
     }
