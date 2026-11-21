@@ -236,8 +236,10 @@ let currentEntries = [];
 
 const $ = id => document.getElementById(id);
 
-$("load").addEventListener("click", loadDashboard);
-
+$("load").addEventListener("click", function() {
+  alert("Admin button is working!");
+  loadDashboard();
+});
 $("key").addEventListener("keydown", e => {
   if(e.key === "Enter") loadDashboard();
 });
