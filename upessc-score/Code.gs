@@ -288,4 +288,10 @@ function responseHtml_(requestId, ok, message) {
 function safeCell_(value) {
   const s = String(value || "");
   return /^[=+\-@]/.test(s) ? "'" + s : s;
+}  
+function resetAdminKey() {
+  PropertiesService.getScriptProperties()
+    .setProperty("ADMIN_KEY", INITIAL_ADMIN_KEY);
+
+  Logger.log("Admin key updated successfully.");
 }
