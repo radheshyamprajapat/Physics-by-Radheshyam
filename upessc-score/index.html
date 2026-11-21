@@ -129,7 +129,7 @@
       statusBox.className = "status err"; return;
     }
     if(!Number.isFinite(m) || m < 0 || m > 360){
-      statusBox.textContent = "कृपया 0 से 120 के बीच वैध कुल अंक भरें।";
+    statusBox.textContent = "कृपया 0 से 360 के बीच वैध कुल अंक भरें।";
       statusBox.className = "status err"; return;
     }
     if(!document.getElementById("shift").value){
